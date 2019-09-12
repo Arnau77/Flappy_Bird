@@ -24,7 +24,8 @@ public:
 	SDL_Rect ground{ 292,0,168,56};
 	SDL_Rect pipe_down{ 56,323,26,160 };
 	SDL_Rect pipe_up{ 84,323,26,160 };
-	float ground_movement;// [2];
+	bool startpipes;
+	float ground_movement;
 	float pipe_movement[3];
 	int pipe_height[3];
 	bool pipe_true[3];

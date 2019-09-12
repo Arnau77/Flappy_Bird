@@ -7,6 +7,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleController.h"
+#include "ModulePlayer.h"
 #include "ModuleBackground.h"
 
 Application::Application()
@@ -20,6 +21,7 @@ Application::Application()
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
 	modules[i++] = background = new ModuleBackground();
+	modules[i++] = player = new ModulePlayer();
 	modules[i++] = collision = new ModuleCollision();
 
 }
