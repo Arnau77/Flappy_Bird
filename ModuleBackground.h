@@ -24,6 +24,8 @@ public:
 	SDL_Rect ground{ 292,0,168,56};
 	SDL_Rect pipe_down{ 56,323,26,160 };
 	SDL_Rect pipe_up{ 84,323,26,160 };
+	Collider* *pipe_collider;
+	Collider* *point_collider;
 	bool startpipes;
 	float ground_movement;
 	float pipe_movement[3];

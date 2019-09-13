@@ -27,6 +27,7 @@ public:
 	void StopChunk();
 	void PlayMusic(_Mix_Music*);
 	void StopMusic();
+	int Check_Playing(int channel=1);
 
 public:
 	Mix_Chunk * chunks[MAX_CHUNK];

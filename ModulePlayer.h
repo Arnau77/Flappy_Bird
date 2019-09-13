@@ -28,13 +28,19 @@ public:
 	iPoint position;
 	Mix_Chunk *jumpsound;
 	Mix_Chunk *hitsound;
+	Mix_Chunk *diesound;
+	Mix_Chunk *pointsound;
 	Animation jump;
 	Animation fly;
 	Animation idle;
 	Animation* current_animation;
+	Collider* player_collider;
 	float speed;
+	bool die_sound_bool;
+	bool reset;
 	bool game_over;
 	float angle;
+	int point_sound_counter;
 };
 
 #endif

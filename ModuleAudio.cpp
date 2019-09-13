@@ -73,6 +73,7 @@ Mix_Chunk* const ModuleAudio::LoadChunk(const char* path) {
 	for (int i = 0; i < MAX_CHUNK; i++) {
 		if (chunks[i] == nullptr) {
 			chunks[i] = chunk;
+			chunks[i]->volume = MIX_MAX_VOLUME;
 			return chunk;
 		}
 	}
@@ -140,4 +141,9 @@ void ModuleAudio::PlayMusic(_Mix_Music* music) {
 
 void ModuleAudio::StopMusic() {
 	if (Mix_FadeOutMusic(1000) != 1) LOG("Music not stoping correctly: Mix_FadeOutMusic: %s", Mix_GetError());
+}
+
+int ModuleAudio::Check_Playing(int channel) {
+	int n = Mix_Playing(channel);
+	return n;
 }
