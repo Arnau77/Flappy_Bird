@@ -16,6 +16,8 @@ This game is played using these keys in the keyboard:
  
 - Return (or Enter): to pause and unpause the game.
 
+- Escape: to exit the game.
+
 ## History
 
 Release history: 
