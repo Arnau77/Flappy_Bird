@@ -6,16 +6,15 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
-#include "ModuleController.h"
 #include "ModulePlayer.h"
 #include "ModuleBackground.h"
+#include "ModuleUI.h"
 
 Application::Application()
 {
 	int i = 0;
 	modules[i++] = window = new ModuleWindow();
 	modules[i++] = render = new ModuleRender();
-	modules[i++] = controller = new ModuleController();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = fonts = new ModuleFonts();
@@ -23,6 +22,7 @@ Application::Application()
 	modules[i++] = background = new ModuleBackground();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = UI = new ModuleUI();
 
 }
 

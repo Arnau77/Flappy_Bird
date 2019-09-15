@@ -7,6 +7,7 @@
 #include "Animation.h"
 #include"ModuleCollision.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "SDL/include/SDL.h"
 #include <stdlib.h>
 #include <time.h>
@@ -27,8 +28,13 @@ bool ModuleBackground::Start() {
 			pipe_height[i] = rand() % 201;
 		} while (pipe_height[i] < 60);
 	}
+	title_height = 75;
 	pipe_true[0] = true;
+	title_scene = true;
 	startpipes = false;
+	title_up = true;
+	title_avoid_bug_fade = true;
+	fade = false;
 	pipe_collider = new Collider*[6];
 	point_collider = new Collider*[3];
 	for (int i = 0; i < 6; i++) {
@@ -36,10 +42,12 @@ bool ModuleBackground::Start() {
 			pipe_collider[i] = App->collision->AddCollider({ SCREEN_WIDTH,pipe_height[i],26,160 }, COLLIDER_WALL);
 			point_collider[i] = App->collision->AddCollider({ SCREEN_WIDTH,0,1,SCREEN_HEIGHT}, COLLIDER_POINT);
 		}
-		else pipe_collider[i] = App->collision->AddCollider({ SCREEN_WIDTH,pipe_height[i-3]-220,26,160 }, COLLIDER_WALL);
+		else pipe_collider[i] = App->collision->AddCollider({ SCREEN_WIDTH,pipe_height[i-3]-420,26,360 }, COLLIDER_WALL);
 	}
 	return true;
 }
+
+
 update_status ModuleBackground::Update() {
 	App->render->Blit(graphics, 0, 0, &(back));  //Background
 	//PIPES
@@ -54,7 +62,7 @@ update_status ModuleBackground::Update() {
 		}
 		pipe_true[0] = true;
 	}
-	if (startpipes == true) {
+	if (startpipes == true && App->UI->pause == false) {
 		for (int i = 0; i < 3; i++) {
 			if (pipe_true[i] == true && pipe_movement[i] <= -26) {
 				pipe_movement[i] = SCREEN_WIDTH;
@@ -72,10 +80,15 @@ update_status ModuleBackground::Update() {
 			}
 		}
 	}
+	else if (title_scene==false && startpipes == false && App->player->game_over == false) {
+		App->render->Blit(graphics, 25, 45, &(get_ready));
+		App->render->Blit(graphics, 45, 90, &(tap_tap));
+	}
+
 	for (int i = 0; i < 3; i++) {
 		pipe_collider[i]->SetPos(pipe_movement[i], pipe_height[i]);
 		point_collider[i]->SetPos(pipe_movement[i]+26, 0);
-		pipe_collider[i+3]->SetPos(pipe_movement[i], pipe_height[i] - 220);
+		pipe_collider[i+3]->SetPos(pipe_movement[i], pipe_height[i] - 420);
 	}
 	for (int i = 0; i < 3; i++) {
 		if (pipe_true[i] == true) {
@@ -87,10 +100,28 @@ update_status ModuleBackground::Update() {
 
 	//GROUND
 	App->render->Blit(graphics, ground_movement, 200, &(ground));
-	if (App->player->game_over == false) {
+	if (App->player->game_over == false && App->UI->pause == false) {
 		if (ground_movement <= -23)ground_movement = 0;
 		else ground_movement -= 1;
 	}
+
+	////TITLE SCENE
+	if (title_scene == true) {
+		App->render->Blit(graphics, 15, title_height, &(title));
+		if (title_up == true) {
+			if (title_height > 65)title_height -= 0.5;
+			else title_up = false;
+		}
+		else {
+			if (title_height < 85)title_height += 0.5;
+			else title_up = true;
+		}
+		if (fade == true)App->render->Blit(App->background->graphics, 25, 177, &(start_button));
+		else App->render->Blit(App->background->graphics, 25, 175, &(start_button));
+		App->render->Blit(App->background->graphics, 80, 175, &(score_button));
+		App->render->Blit(App->background->graphics, 25, 215, &(studios));
+	}
+
 	
 	return UPDATE_CONTINUE;
 }

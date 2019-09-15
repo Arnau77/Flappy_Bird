@@ -33,6 +33,9 @@ public:
 
 		return frames[(int)current_frame];
 	}
+	SDL_Rect& GetCurrentFrameWithoutAnim() {
+		return frames[(int)current_frame];
+	}
 	int GetFinished() { return finished; }
 	void Finish() { finished = 1; }
 	void Reset() { current_frame = 0;	finished = 0;}

@@ -33,12 +33,13 @@ public:
 	Animation jump;
 	Animation fly;
 	Animation idle;
-	Animation* current_animation;
 	Collider* player_collider;
 	float speed;
 	bool die_sound_bool;
+	bool push_reset;
 	bool reset;
 	bool game_over;
+	bool stop;
 	float angle;
 	int point_sound_counter;
 };

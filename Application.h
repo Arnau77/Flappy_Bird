@@ -13,9 +13,9 @@ class Module;
 class ModuleAudio;
 class ModuleCollision;
 class ModuleFonts;
-class ModuleController;
 class ModuleBackground;
 class ModulePlayer;
+class ModuleUI;
 
 class Application
 {
@@ -29,9 +29,9 @@ public:
 	ModuleAudio* audio;
 	ModuleCollision* collision;
 	ModuleFonts* fonts;
-	ModuleController* controller;
 	ModuleBackground* background;
 	ModulePlayer* player;
+	ModuleUI* UI;
 
 public:
 
